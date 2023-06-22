@@ -1,0 +1,189 @@
+if not game.CoreGui.RobloxGui.ControlFrame:FindFirstChild("KeyUsed") then
+	game.Players.LocalPlayer:Kick("Key Bypassed")
+end
+local library = loadstring(game:HttpGet("https://pastebin.com/raw/eKwyeQa0", true))()
+local activated = false
+local Teleport1 = "Rebirth"
+local Teleport2 = "Ultra Rebirth"
+local Teleport3 = 1
+local Teleport4 = 2
+local TeleportPad1 = 1
+local TeleportPad2 = 2
+local tab1 = library:CreateTab("Button Farm", true)
+local toggle = library:MakeToggle(tab1,"Toggle",false,function(toggle)
+	if Teleport1 == "Rebirth" then
+   		Teleport3 = 1
+  	elseif Teleport1 == "Ultra Rebirth" then
+  		Teleport3 = 2
+ 	elseif Teleport1 == "Prestige" then
+  		Teleport3 = 3
+ 	elseif Teleport1 == "Ultra Prestige" then
+  		Teleport3 = 4
+  	else print("Teleport1 stat error") end
+  
+  	if Teleport2 == "Rebirth" then
+  		Teleport4 = 1
+  	elseif Teleport2 == "Ultra Rebirth" then
+ 		Teleport4 = 2
+  	elseif Teleport2 == "Prestige" then
+ 		Teleport4 = 3
+  	elseif Teleport2 == "Ultra Prestige" then
+  		Teleport4 = 4
+  	else print("Teleport2 stat error") end
+  	
+    activated = not activated
+   	
+   	while activated do
+	game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game.Workspace.Buttons:FindFirstChild(Teleport3):FindFirstChild(TeleportPad1).Touch.CFrame
+	wait(TimeToWait)
+	game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game.Workspace.Buttons:FindFirstChild(Teleport4):FindFirstChild(TeleportPad2).Touch.CFrame
+	wait(TimeToWait)
+	end
+end)
+--local text = library:MakeLabel(tab1,"Gay label")
+
+
+local box = library:MakeBox(tab1,"Teleport1","1 to 13",function(box)
+   TeleportPad1 = box.Text
+end)
+local dropdown = library:MakeDropdown(tab1,"Stat to farm1",{"Rebirth","Ultra Rebirth","Prestige","Ultra Prestige"},"Rebirth",function(dropdown)
+   Teleport1 = dropdown.Text
+end)
+local text = library:MakeLabel(tab1,"")
+local text = library:MakeLabel(tab1,"")
+local text = library:MakeLabel(tab1,"")
+local box2 = library:MakeBox(tab1,"Teleport2","1 to 13",function(box2)
+	TeleportPad2 = box2.Text
+end)
+
+local dropdown2 = library:MakeDropdown(tab1,"Stat to farm2",{"Rebirth","Ultra Rebirth","Prestige","Ultra Prestige"},"Ultra Rebirth",function(dropdown2)
+	Teleport2 = dropdown2.Text
+end)
+local text = library:MakeLabel(tab1,"")
+local text = library:MakeLabel(tab1,"")
+local text = library:MakeLabel(tab1,"")
+local text = library:MakeLabel(tab1,"")
+local timeToWait = library:MakeBox(tab1,"TimeToWait","SecondsToWait",function(timeToWait)
+	TimeToWait = timeToWait.Text
+end)
+
+local ScreenGui = Instance.new("ScreenGui")
+local Frame = Instance.new("Frame")
+local TextLabel = Instance.new("TextLabel")
+
+--Properties:
+
+ScreenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+
+Frame.Parent = ScreenGui
+Frame.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Frame.BackgroundTransparency = 1.000
+Frame.Size = UDim2.new(0, 100, 0, 100)
+Frame.Visible = false
+
+TextLabel.Parent = Frame
+TextLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+TextLabel.BackgroundTransparency = 1.000
+TextLabel.Position = UDim2.new(9, 0, 0.4, 0)
+TextLabel.Size = UDim2.new(0, 81, 0, 25)
+TextLabel.Font = Enum.Font.SourceSans
+TextLabel.TextColor3 = Color3.fromRGB(0, 0, 0)
+TextLabel.TextScaled = true
+TextLabel.TextSize = 14.000
+TextLabel.TextWrapped = true
+
+local textLabel = TextLabel
+
+local runService = game:GetService("RunService")
+
+local goodFPS = 30
+local okFPS = 15
+
+runService.RenderStepped:Connect(function()
+	
+	local currentFPS = workspace:GetRealPhysicsFPS()
+	textLabel.Text = math.floor(currentFPS).." FPS"
+	
+	if currentFPS >= goodFPS then
+		
+		textLabel.TextColor3 = Color3.new(0,1,0)
+		
+	elseif currentFPS >= okFPS then
+		
+		textLabel.TextColor3 = Color3.new(1, 0.333333, 0)
+		
+	else
+		
+		textLabel.TextColor3 = Color3.new(1,0,0)
+		
+	end
+	
+end)
+
+local tab2 = library:CreateTab("Player Settings", true)
+
+local FpsCounter = library:MakeToggle(tab2, "Fps Counter",false,function(FpsCounter)
+	Frame.Visible = not Frame.Visible
+end)
+
+local fpscapbox = library:MakeBox(tab2, "Fps Cap", "Set your fps cap", function(fpscapbox)
+	setfpscap(tonumber(fpscapbox.text))
+end)
+
+local playerspeed = library:MakeBox(tab2, "Player Speed", "Set your speed", function(playerspeed)
+	game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = tonumber(playerspeed.Text)
+end)
+
+local jumpheight = library:MakeBox(tab2, "Jump Height", "Set your jump height", function(jumpheight)
+	game.Players.LocalPlayer.Character.Humanoid.JumpPower = tonumber(jumpheight.Text)
+end)
+
+local tab3 = library:CreateTab("Credits", true)
+
+local text = library:MakeLabel(tab3,"Library coming from")
+local text = library:MakeLabel(tab3,"Someone Insane#7688")
+local text = library:MakeLabel(tab3,"")
+local text = library:MakeLabel(tab3,"Scripts :")
+local text = library:MakeLabel(tab3,"eazyexploit on discord")
+local text = library:MakeButton(tab3,"Copy link of the library",function(button)
+	setclipboard("https://v3rmillion.net/showthread.php?tid=912367&highlight=Library")
+	local NotificationBindable = Instance.new("BindableFunction")
+	NotificationBindable.OnInvoke = callback
+	--
+	game.StarterGui:SetCore("SendNotification",  {
+ 	Title = "Link Copied!";
+ 	Text = "The link of the library script is copied";
+ 	Icon = "";
+ 	Duration = 5;
+ 	Button1 = "Ok";
+ 	Callback = NotificationBindable;
+	})
+end)
+
+local tab4 = library:CreateTab("Informations", true)
+
+local text = library:MakeLabel(tab4,"Working on fluxus")
+local text = library:MakeLabel(tab4,"")
+local text = library:MakeLabel(tab4,"Idk if everything is")
+local text = library:MakeLabel(tab4,"working on")
+local text = library:MakeLabel(tab4,"other exploit")
+local text = library:MakeLabel(tab4,"")
+local discordlink = library:MakeButton(tab4,"Copy link of the discord", function(button)
+	setclipboard("https://discord.gg/6rsszR2Suj")
+	local NotificationBindable = Instance.new("BindableFunction")
+	NotificationBindable.OnInvoke = callback
+	--
+	game.StarterGui:SetCore("SendNotification",  {
+ 	Title = "Link Copied!";
+ 	Text = "The link of the discord server is copied";
+ 	Icon = "";
+ 	Duration = 5;
+ 	Button1 = "Ok";
+ 	Callback = NotificationBindable;
+	})
+end)
+
+local function callback(Text)
+ 	print("link copied")
+end
